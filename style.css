@@ -1,0 +1,75 @@
+body {
+    /* Pembe Arka Plan Teması */
+    background-color: #ffc0cb; /* Açık Pembe */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+    color: #333;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#princessButton {
+    /* Beyaz Buton Ortada */
+    background-color: white;
+    color: #ff69b4; /* Sıcak Pembe Yazı */
+    border: 5px solid #ff69b4;
+    padding: 20px 40px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+#princessButton:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+#celebrationMessage {
+    margin-top: 30px;
+    background-color: white;
+    color: #ff1493; /* Koyu Pembe Yazı */
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    /* Başlangıçta Görünmez */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+#celebrationMessage h1 {
+    margin: 0;
+    font-size: 36px;
+    animation: pulse 1.5s infinite; /* Kutlama Efekti - Titreme */
+}
+
+/* Başlangıçta gizli kalacak sınıf */
+.hidden {
+    display: none;
+}
+
+/* Görünür olduğunda uygulanacak sınıf */
+.visible {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Kutlama Efekti (Keyframe) */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
