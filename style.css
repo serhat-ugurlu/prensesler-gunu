@@ -1,4 +1,6 @@
+/* Genel Sayfa Stilleri */
 body {
+    /* Pembe Arka Plan Teması */
     background-color: #ffc0cb; /* Açık Pembe */
     display: flex;
     justify-content: center;
@@ -14,13 +16,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Konumlandırma için göreceli hale getir */
+    /* Konumlandırma için göreceli hale getir (Kalp ve Mesaj için) */
     position: relative; 
 }
 
+/* Beyaz Buton Stilleri */
 #princessButton {
     background-color: white;
-    color: #ff69b4; 
+    color: #ff69b4; /* Sıcak Pembe Yazı */
     border: 5px solid #ff69b4;
     padding: 20px 40px;
     font-size: 24px;
@@ -28,10 +31,12 @@ body {
     border-radius: 50px;
     cursor: pointer;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+    transition: all 0.5s ease; /* Opaklık geçişini de kapsar */
     z-index: 10; /* Butonun üstte kalması için */
-    width: 150px; /* Sabit genişlik verdik */
-    height: 64px; /* Sabit yükseklik verdik (padding ile) */
+    
+    /* Kalple uyumlu genişlik ve yükseklik */
+    width: 250px; 
+    height: 80px; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,18 +47,19 @@ body {
     transform: scale(1.05);
 }
 
-/* Mesaj Stilleri (Değişiklik yok) */
+/* Mesaj Stilleri */
 #celebrationMessage {
     position: absolute; /* Butonun üstüne yerleştirmek için */
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); /* Tam merkeze hizala */
     margin: 0;
     background-color: white;
-    color: #ff1493; 
+    color: #ff1493; /* Koyu Pembe Yazı */
     padding: 20px 30px;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    /* Başlangıçta görünmez ve animasyonlu geçiş */
     opacity: 0;
     transition: opacity 1s ease;
     z-index: 100; /* En üste çıksın */
@@ -62,48 +68,62 @@ body {
 #celebrationMessage h1 {
     margin: 0;
     font-size: 36px;
-    white-space: nowrap;
-    animation: pulse 1.5s infinite;
+    white-space: nowrap; /* Metnin tek satırda kalmasını sağlar */
+    animation: pulse 1.5s infinite; /* Mesajın hafif titremesi */
 }
 
+/* Görünürlük Kontrol Sınıfları */
 .hidden { display: none; }
 .visible { opacity: 1 !important; display: block !important; }
 
+/* Mesaj Titreme Efekti */
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
 
-/* ------ Kalp Çizim Stilleri (YENİ) ------ */
+/* ------ Kalp Çizim Stilleri ------ */
+
+/* Kalp Kapsayıcısı (Boyut ve Konum) */
 #heartContainer {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px; /* Kalp boyutu */
-    height: 200px;
+    transform: translate(-50%, -50%); /* Tam merkeze hizala */
+    width: 300px; /* Kalp boyutu */
+    height: 300px;
     transition: opacity 0.5s;
+    z-index: 5; /* Butonun altında kalsın */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+#heartContainer svg {
+    width: 100%; /* SVG'nin container'ı doldurmasını sağla */
+    height: 100%;
+}
+
+/* Kalp Yolunun (Path) Stilleri */
 #heartPath {
-    fill: none; /* İçini boş bırak */
-    stroke: red; /* Kırmızı çizgi */
+    fill: none; /* İçini başlangıçta boş bırak */
+    stroke: red; /* Kırmızı çizgi rengi */
     stroke-width: 5;
-    /* Çizim efektini oluşturmak için bu iki özellik kritik */
+    /* Çizim Efekti İçin Gerekli */
     stroke-dasharray: 400; /* Kalp yolunun yaklaşık uzunluğu */
     stroke-dashoffset: 400; /* Başlangıçta çizginin tamamı gizli */
 }
 
-/* Kalp çizilmeye başladığında bu sınıf eklenecek */
+/* Kalp çizilmeye başladığında bu sınıf JS ile eklenecek */
 .drawing {
-    animation: drawHeart 3s forwards; /* 3 saniyede tamamlansın */
+    animation: drawHeart 3s forwards; /* 3 saniyede tamamlansın ve son durumda kalsın (forwards) */
 }
 
 /* Başlangıçta kalp kabı gizli */
 .hidden-heart {
     opacity: 0;
-    pointer-events: none;
+    pointer-events: none; /* Tıklama olaylarını engeller */
 }
 
 /* Kalp çizim animasyonu */
@@ -111,4 +131,17 @@ body {
     to {
         stroke-dashoffset: 0; /* Çizgiyi tamamen görünür yap */
     }
+}
+
+/* Kalp tamamen çizildikten sonra titreşim/nabız efekti (Opsiyonel) */
+.heart-beat svg {
+    animation: heartBeat 1.5s infinite;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.05); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.05); }
+    60% { transform: scale(1); }
 }
