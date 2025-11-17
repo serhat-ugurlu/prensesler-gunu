@@ -1,5 +1,4 @@
 body {
-    /* Pembe Arka Plan Teması */
     background-color: #ffc0cb; /* Açık Pembe */
     display: flex;
     justify-content: center;
@@ -15,12 +14,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* Konumlandırma için göreceli hale getir */
+    position: relative; 
 }
 
 #princessButton {
-    /* Beyaz Buton Ortada */
     background-color: white;
-    color: #ff69b4; /* Sıcak Pembe Yazı */
+    color: #ff69b4; 
     border: 5px solid #ff69b4;
     padding: 20px 40px;
     font-size: 24px;
@@ -29,6 +29,12 @@ body {
     cursor: pointer;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+    z-index: 10; /* Butonun üstte kalması için */
+    width: 150px; /* Sabit genişlik verdik */
+    height: 64px; /* Sabit yükseklik verdik (padding ile) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #princessButton:hover {
@@ -36,62 +42,73 @@ body {
     transform: scale(1.05);
 }
 
+/* Mesaj Stilleri (Değişiklik yok) */
 #celebrationMessage {
-    margin-top: 30px;
+    position: absolute; /* Butonun üstüne yerleştirmek için */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
     background-color: white;
-    color: #ff1493; /* Koyu Pembe Yazı */
+    color: #ff1493; 
     padding: 20px 30px;
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    /* Başlangıçta Görünmez */
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 1s ease, transform 1s ease;
+    transition: opacity 1s ease;
+    z-index: 100; /* En üste çıksın */
 }
 
 #celebrationMessage h1 {
     margin: 0;
     font-size: 36px;
-    animation: pulse 1.5s infinite; /* Kutlama Efekti - Titreme */
+    white-space: nowrap;
+    animation: pulse 1.5s infinite;
 }
 
-/* Başlangıçta gizli kalacak sınıf */
-.hidden {
-    display: none;
-}
+.hidden { display: none; }
+.visible { opacity: 1 !important; display: block !important; }
 
-/* Görünür olduğunda uygulanacak sınıf */
-.visible {
-    display: block !important;
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-/* Kutlama Efekti (Keyframe) */
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
 
-.confetti {
-    width: 10px;
-    height: 10px;
-    position: fixed;
-    top: -10px; /* Ekranın üstünden başlasın */
-    opacity: 0;
-    transform: rotate(45deg);
-    animation: fall 5s linear infinite; /* 5 saniyelik düşüş animasyonu */
+/* ------ Kalp Çizim Stilleri (YENİ) ------ */
+#heartContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px; /* Kalp boyutu */
+    height: 200px;
+    transition: opacity 0.5s;
 }
 
-/* Düşme Animasyonunu Tanımlama */
-@keyframes fall {
-    0% {
-        transform: translateY(-100px) rotate(45deg) scale(1);
-        opacity: 1; /* Başlangıçta tam görünür */
-    }
-    100% {
-        transform: translateY(100vh) rotate(1000deg) scale(0.5); /* Ekranın altından çıksın */
-        opacity: 0.5;
+#heartPath {
+    fill: none; /* İçini boş bırak */
+    stroke: red; /* Kırmızı çizgi */
+    stroke-width: 5;
+    /* Çizim efektini oluşturmak için bu iki özellik kritik */
+    stroke-dasharray: 400; /* Kalp yolunun yaklaşık uzunluğu */
+    stroke-dashoffset: 400; /* Başlangıçta çizginin tamamı gizli */
+}
+
+/* Kalp çizilmeye başladığında bu sınıf eklenecek */
+.drawing {
+    animation: drawHeart 3s forwards; /* 3 saniyede tamamlansın */
+}
+
+/* Başlangıçta kalp kabı gizli */
+.hidden-heart {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Kalp çizim animasyonu */
+@keyframes drawHeart {
+    to {
+        stroke-dashoffset: 0; /* Çizgiyi tamamen görünür yap */
     }
 }
