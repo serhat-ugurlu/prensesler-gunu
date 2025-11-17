@@ -1,3 +1,4 @@
+/* Genel Sayfa Stilleri */
 body {
     /* Pembe Arka Plan Teması */
     background-color: #ffc0cb; /* Açık Pembe */
@@ -24,8 +25,8 @@ body {
     background-color: white;
     color: #ff69b4; /* Sıcak Pembe Yazı */
     border: 5px solid #ff69b4;
-    padding: 20px 40px;
-    font-size: 24px;
+    padding: 15px 30px; /* Padding küçültüldü */
+    font-size: 20px; /* Yazı boyutu küçültüldü */
     font-weight: bold;
     border-radius: 50px;
     cursor: pointer;
@@ -33,9 +34,9 @@ body {
     transition: all 0.5s ease;
     z-index: 10; /* Butonun üstte kalması için */
     
-    /* Butonun boyutlarını Canvas ile uyumlu hale getirdik */
-    width: 250px; 
-    height: 80px; 
+    /* Butonun boyutları Canvas ile daha uyumlu */
+    width: 200px; 
+    height: 60px; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,6 +98,20 @@ body {
 /* Kalp çizildiğinde görünecek */
 .visible-heart {
     opacity: 1;
+}
+
+/* Kalp tam dolduktan sonra titreme/nabız efekti */
+#heartCanvas.heart-beat {
+    animation: canvasHeartBeat 1.5s infinite;
+}
+
+/* Kalp Titreme Animasyonu */
+@keyframes canvasHeartBeat {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    15% { transform: translate(-50%, -50%) scale(1.03); } /* Hafifçe büyüt */
+    30% { transform: translate(-50%, -50%) scale(1); }
+    45% { transform: translate(-50%, -50%) scale(1.03); }
+    60% { transform: translate(-50%, -50%) scale(1); }
 }
 
 /* Görünürlük Kontrol Sınıfları */
