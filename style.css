@@ -1,4 +1,3 @@
-/* Genel Sayfa Stilleri */
 body {
     /* Pembe Arka Plan Teması */
     background-color: #ffc0cb; /* Açık Pembe */
@@ -16,7 +15,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Konumlandırma için göreceli hale getir (Kalp ve Mesaj için) */
+    /* Canvas, Buton ve Mesaj konumlandırması için göreceli hale getir */
     position: relative; 
 }
 
@@ -31,10 +30,10 @@ body {
     border-radius: 50px;
     cursor: pointer;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.5s ease; /* Opaklık geçişini de kapsar */
+    transition: all 0.5s ease;
     z-index: 10; /* Butonun üstte kalması için */
     
-    /* Kalple uyumlu genişlik ve yükseklik */
+    /* Butonun boyutlarını Canvas ile uyumlu hale getirdik */
     width: 250px; 
     height: 80px; 
     display: flex;
@@ -68,13 +67,9 @@ body {
 #celebrationMessage h1 {
     margin: 0;
     font-size: 36px;
-    white-space: nowrap; /* Metnin tek satırda kalmasını sağlar */
+    white-space: nowrap; 
     animation: pulse 1.5s infinite; /* Mesajın hafif titremesi */
 }
-
-/* Görünürlük Kontrol Sınıfları */
-.hidden { display: none; }
-.visible { opacity: 1 !important; display: block !important; }
 
 /* Mesaj Titreme Efekti */
 @keyframes pulse {
@@ -83,65 +78,27 @@ body {
     100% { transform: scale(1); }
 }
 
-/* ------ Kalp Çizim Stilleri ------ */
-
-/* Kalp Kapsayıcısı (Boyut ve Konum) */
-#heartContainer {
+/* ------ Canvas Stilleri (Kardioid Çizimi) ------ */
+#heartCanvas {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* Tam merkeze hizala */
-    width: 900px; /* Kalp boyutu */
-    height: 900px;
-    transition: opacity 0.5s;
     z-index: 5; /* Butonun altında kalsın */
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-#heartContainer svg {
-    width: 100%; /* SVG'nin container'ı doldurmasını sağla */
-    height: 100%;
-}
-
-/* Kalp Yolunun (Path) Stilleri */
-#heartPath {
-    fill: none; /* İçini başlangıçta boş bırak */
-    stroke: red; /* Kırmızı çizgi rengi */
-    stroke-width: 5;
-    /* Çizim Efekti İçin Gerekli */
-    stroke-dasharray: 400; /* Kalp yolunun yaklaşık uzunluğu */
-    stroke-dashoffset: 400; /* Başlangıçta çizginin tamamı gizli */
-}
-
-/* Kalp çizilmeye başladığında bu sınıf JS ile eklenecek */
-.drawing {
-    animation: drawHeart 3s forwards; /* 3 saniyede tamamlansın ve son durumda kalsın (forwards) */
-}
-
-/* Başlangıçta kalp kabı gizli */
+/* Başlangıçta Canvas gizli */
 .hidden-heart {
     opacity: 0;
-    pointer-events: none; /* Tıklama olaylarını engeller */
+    transition: opacity 0.5s;
+    pointer-events: none;
 }
 
-/* Kalp çizim animasyonu */
-@keyframes drawHeart {
-    to {
-        stroke-dashoffset: 0; /* Çizgiyi tamamen görünür yap */
-    }
+/* Kalp çizildiğinde görünecek */
+.visible-heart {
+    opacity: 1;
 }
 
-/* Kalp tamamen çizildikten sonra titreşim/nabız efekti (Opsiyonel) */
-.heart-beat svg {
-    animation: heartBeat 1.5s infinite;
-}
-
-@keyframes heartBeat {
-    0% { transform: scale(1); }
-    15% { transform: scale(1.05); }
-    30% { transform: scale(1); }
-    45% { transform: scale(1.05); }
-    60% { transform: scale(1); }
-}
+/* Görünürlük Kontrol Sınıfları */
+.hidden { display: none; }
+.visible { opacity: 1 !important; display: block !important; }
