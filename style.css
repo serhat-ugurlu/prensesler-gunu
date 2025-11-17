@@ -73,3 +73,25 @@ body {
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
+
+.confetti {
+    width: 10px;
+    height: 10px;
+    position: fixed;
+    top: -10px; /* Ekranın üstünden başlasın */
+    opacity: 0;
+    transform: rotate(45deg);
+    animation: fall 5s linear infinite; /* 5 saniyelik düşüş animasyonu */
+}
+
+/* Düşme Animasyonunu Tanımlama */
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) rotate(45deg) scale(1);
+        opacity: 1; /* Başlangıçta tam görünür */
+    }
+    100% {
+        transform: translateY(100vh) rotate(1000deg) scale(0.5); /* Ekranın altından çıksın */
+        opacity: 0.5;
+    }
+}
